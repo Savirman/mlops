@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import os
 
 from sklearn.model_selection import train_test_split
 
@@ -13,6 +14,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 
 train = pd.concat([X_train, y_train], axis=1)
 test = pd.concat([X_test, y_test], axis=1)
+
+# Проверяем существование директории 'train' и создаем ее, если она не существует
+if not os.path.exists('train'):
+    os.makedirs('train')
+
+# Проверяем существование директории 'test' и создаем ее, если она не существует
+if not os.path.exists('test'):
+    os.makedirs('test')
 
 # сохраняем тренировочную и тестовую выборки в csv-файлы
 train.to_csv('train/data_train.csv', index=False)
